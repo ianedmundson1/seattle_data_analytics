@@ -1,0 +1,14 @@
+{
+    "jupyter.interactiveWindow.cellMarker.codeRegex": "^# COMMAND ----------|^# Databricks notebook source|^(#\\s*%%|#\\s*\\<codecell\\>|#\\s*In\\[\\d*?\\]|#\\s*In\\[ \\])",
+    "jupyter.interactiveWindow.cellMarker.default": "# COMMAND ----------",
+    "sqltools.connections": [
+        {
+            "connectionMethod": "VS Code Extension (beta)",
+            "catalog": "seattle_data",
+            "previewLimit": 50,
+            "driver": "Databricks",
+            "name": "databricks",
+            "path": "/sql/1.0/warehouses/ca0e7af237bc8d9b"
+        }
+    ]
+}

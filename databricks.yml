@@ -1,0 +1,51 @@
+# This is a Databricks asset bundle definition for seattle_data_analytics.
+# The Databricks extension requires databricks.yml configuration file.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
+bundle:
+  name: seattle_data_analytics
+
+resources:
+  pipelines:
+    seattle_fire_pipeline:
+      name: "seattle_fire_pipeline"
+      catalog: "seattle_data"
+      schema: "seattle_bronze"
+      serverless: true
+      libraries:
+        - file:
+            path: transformations/bronze/911_calls_table.py
+
+  jobs:
+    ingest_seattle_fire_911:
+      name: "ingest_seattle_fire_911"
+      tasks:
+        - task_key: pull_api_data
+          spark_python_task:
+            python_file: ingestion/seattle_fire_911_calls.py
+          environment_key: default
+        - task_key: run_pipeline
+          depends_on:
+            - task_key: pull_api_data
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.seattle_fire_pipeline.id}
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "2"
+      schedule:
+        quartz_cron_expression: "0 */5 * * * ?"  # every 5 minutes
+        timezone_id: America/Los_Angeles
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-253f88d4-87e0.cloud.databricks.com
+
+  ## Optionally, there could be 'staging' or 'prod' targets here.
+  #
+  # prod:
+  #   workspace:
+  #     host: https://dbc-253f88d4-87e0.cloud.databricks.com
