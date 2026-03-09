@@ -1,6 +1,6 @@
-# Seattle Fire 911 Data Analytics
+# Seattle Data Analytics
 
-This repository contains data pipelines, transformations, and exploratory analysis for Seattle Fire 911 call data using Databricks and Python.
+This repository contains data pipelines, transformations, and exploratory analysis for Seattle call data using Databricks and Python.
 
 ## Project Structure
 
