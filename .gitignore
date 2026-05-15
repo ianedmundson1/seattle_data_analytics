@@ -1,2 +1,12 @@
 
 .databricks
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+*.vscode/
+*.ipynb_checkpoints
+*.log
+*.csv
+*.parquet
+*.db            
